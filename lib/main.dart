@@ -1,4 +1,4 @@
-import 'package:fl_live_launcher/apps_grid.dart';
+import 'package:fl_live_launcher/apps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
               settings: settings,
               builder: (context) {
                 switch (settings.name) {
-                  case "apps_grid":
-                    return AppsGridPage();
+                  case "apps":
+                    return AppsPage();
                   default:
                     return HomePage();
                 }
@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
           child: Center(
             child: IconButton(
               icon: Icon(Icons.apps),
-              onPressed: () => Navigator.pushNamed(context, "apps_grid"),
+              onPressed: () => Navigator.pushNamed(context, "apps"),
             ),
           ),
         ),
