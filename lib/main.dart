@@ -45,6 +45,8 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.transparent,
       body: Container(),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.transparent,
+        elevation: 0,
         child: Container(
           height: 70,
           child: Center(
