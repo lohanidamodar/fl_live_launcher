@@ -14,11 +14,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Launcher',
         darkTheme: ThemeData.dark().copyWith(
-          primaryColor: Colors.red,
-          accentColor: Colors.red,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         ),
-        theme: ThemeData(
-          primarySwatch: Colors.red,
+        theme: ThemeData(  
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         onGenerateRoute: (settings) {

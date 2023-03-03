@@ -26,33 +26,38 @@ class _AppsPageState extends State<AppsPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Consumer(
-      builder: (context, watch, _) {
-        final appsInfo = watch(appsProvider);
-        final mode = watch(modeProvider);
+      builder: (context, ref, _) {
+        final appsInfo = ref.watch(appsProvider);
+        final mode = ref.watch(modeProvider);
         return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
               elevation: 0,
+              actionsIconTheme:
+                  IconThemeData(color: Theme.of(context).colorScheme.primary),
+              iconTheme:
+                  IconThemeData(color: Theme.of(context).colorScheme.primary),
               backgroundColor: Colors.transparent,
               actions: [
                 IconButton(
-                  icon: Icon(mode.state == DisplayMode.Grid
-                      ? Icons.list
-                      : Icons.grid_on),
+                  icon: Icon(
+                      mode == DisplayMode.Grid ? Icons.list : Icons.grid_on),
                   onPressed: () {
-                    mode.state = mode.state == DisplayMode.Grid
-                        ? DisplayMode.List
-                        : DisplayMode.Grid;
+                    ref.read(modeProvider.notifier).update((state) =>
+                        mode == DisplayMode.Grid
+                            ? DisplayMode.List
+                            : DisplayMode.Grid);
                   },
                 )
               ],
             ),
             body: appsInfo.when(
-                data: (List<Application> apps) => mode.state == DisplayMode.List
+                data: (List<Application> apps) => mode == DisplayMode.List
                     ? ListView.builder(
                         itemCount: apps.length,
                         itemBuilder: (BuildContext context, int index) {
-                          ApplicationWithIcon app = apps[index];
+                          ApplicationWithIcon app =
+                              apps[index] as ApplicationWithIcon;
                           return ListTile(
                             leading: Image.memory(
                               app.icon,
@@ -73,7 +78,7 @@ class _AppsPageState extends State<AppsPage>
                         ),
                         children: [
                           ...apps.map((app) => AppGridItem(
-                                application: app,
+                                application: app as ApplicationWithIcon?,
                               ))
                         ],
                       ),
@@ -88,30 +93,30 @@ class _AppsPageState extends State<AppsPage>
 }
 
 class AppGridItem extends StatelessWidget {
-  final ApplicationWithIcon application;
+  final ApplicationWithIcon? application;
   const AppGridItem({
     this.application,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        DeviceApps.openApp(application.packageName);
+        DeviceApps.openApp(application!.packageName);
       },
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(8.0),
             child: Image.memory(
-              application.icon,
+              application!.icon,
               fit: BoxFit.contain,
               width: 40,
             ),
           ),
           Text(
-            application.appName,
+            application!.appName,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
