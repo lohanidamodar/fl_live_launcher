@@ -33,16 +33,20 @@ class _AppsPageState extends State<AppsPage>
             extendBodyBehindAppBar: true,
             appBar: AppBar(
               elevation: 0,
+              actionsIconTheme:
+                  IconThemeData(color: Theme.of(context).colorScheme.primary),
+              iconTheme:
+                  IconThemeData(color: Theme.of(context).colorScheme.primary),
               backgroundColor: Colors.transparent,
               actions: [
                 IconButton(
-                  icon: Icon(mode == DisplayMode.Grid
-                      ? Icons.list
-                      : Icons.grid_on),
+                  icon: Icon(
+                      mode == DisplayMode.Grid ? Icons.list : Icons.grid_on),
                   onPressed: () {
-                    ref.read(modeProvider.notifier).update((state) => mode == DisplayMode.Grid
-                        ? DisplayMode.List
-                        : DisplayMode.Grid);
+                    ref.read(modeProvider.notifier).update((state) =>
+                        mode == DisplayMode.Grid
+                            ? DisplayMode.List
+                            : DisplayMode.Grid);
                   },
                 )
               ],
