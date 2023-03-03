@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
     return ProviderScope(
       child: MaterialApp(
         title: 'Flutter Launcher',
-        darkTheme: ThemeData.dark().copyWith(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red, brightness: Brightness.dark),
-        ),
+        darkTheme: ThemeData.dark(),
         theme: ThemeData(  
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
           visualDensity: VisualDensity.adaptivePlatformDensity,
