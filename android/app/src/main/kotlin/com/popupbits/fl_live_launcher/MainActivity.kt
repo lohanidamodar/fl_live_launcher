@@ -1,4 +1,5 @@
+package com.popupbits.fl_live_launcher
+
 import io.flutter.embedding.android.FlutterActivity
-import io.flutter.plugins.GeneratedPluginRegistrant
 
 class MainActivity: FlutterActivity() {}
