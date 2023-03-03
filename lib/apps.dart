@@ -28,7 +28,7 @@ class _AppsPageState extends State<AppsPage>
     return Consumer(
       builder: (context, ref, _) {
         final appsInfo = ref.watch(appsProvider);
-        final mode = ref.watch(modeProvider.notifier);
+        final mode = ref.watch(modeProvider);
         return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
@@ -36,19 +36,19 @@ class _AppsPageState extends State<AppsPage>
               backgroundColor: Colors.transparent,
               actions: [
                 IconButton(
-                  icon: Icon(mode.state == DisplayMode.Grid
+                  icon: Icon(mode == DisplayMode.Grid
                       ? Icons.list
                       : Icons.grid_on),
                   onPressed: () {
-                    mode.state = mode.state == DisplayMode.Grid
+                    ref.read(modeProvider.notifier).update((state) => mode == DisplayMode.Grid
                         ? DisplayMode.List
-                        : DisplayMode.Grid;
+                        : DisplayMode.Grid);
                   },
                 )
               ],
             ),
             body: appsInfo.when(
-                data: (List<Application> apps) => mode.state == DisplayMode.List
+                data: (List<Application> apps) => mode == DisplayMode.List
                     ? ListView.builder(
                         itemCount: apps.length,
                         itemBuilder: (BuildContext context, int index) {
