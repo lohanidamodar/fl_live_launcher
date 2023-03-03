@@ -10,6 +10,7 @@
         android:label="fl_live_launcher"
         android:icon="@mipmap/ic_launcher">
         <activity
+            android:exported="true"
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.Transparent"
